@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 const uint32_t WIDTH  = 800;
 const uint32_t HEIGHT = 600;
@@ -28,11 +29,11 @@ class HelloTriangleApplication
 
   void createInstance() {
     constexpr vk::ApplicationInfo appInfo {
-      .pApplicationName   = "Hello Triangle",
-      .applicationVersion = VK_MAKE_VERSION(1, 0, 0),
-      .pEngineName        = "No Engine",
-      .engineVersion      = VK_MAKE_VERSION(1, 0, 0),
-      .apiVersion         = vk::ApiVersion14
+      .pApplicationName   {"Hello Triangle"},
+      .applicationVersion {VK_MAKE_VERSION(1, 0, 0)},
+      .pEngineName        {"No Engine"},
+      .engineVersion      {VK_MAKE_VERSION(1, 0, 0)},
+      .apiVersion         {vk::ApiVersion14}
     };
 
     uint32_t glfwExtensionCount {0};
@@ -51,9 +52,9 @@ class HelloTriangleApplication
 
 
     vk::InstanceCreateInfo createInfo { 
-	    .pApplicationInfo        = &appInfo,
-	    .enabledExtensionCount   = glfwExtensionCount,
-	    .ppEnabledExtensionNames = glfwExtensions
+	    .pApplicationInfo        {&appInfo},
+	    .enabledExtensionCount   {glfwExtensionCount},
+	    .ppEnabledExtensionNames {glfwExtensions}
     };
 
     instance = vk::raii::Instance(context, createInfo);
